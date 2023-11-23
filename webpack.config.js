@@ -1,82 +1,89 @@
+/* eslint-disable no-unused-vars */
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { webpack } = require('webpack');
 
 module.exports = {
-  devServer: {
-    static: {
-      directory: path.join(__dirname, '/build'),
-      publicPath: '/',
-    },
-    hot: true,
-    historyApiFallback: true,
-    compress: true,
-    port: 8080,
-    proxy: {
-      '/api': 'http://localhost:3000',
-    },
-  },
-  //This property defines where the application starts
-  entry: './src/index.js',
-
-  //This property defines the file path and the file name which will be used for deploying the bundled file
+  entry: [
+    // entry point of our app
+    './src/index.js',
+  ],
   output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
+    filename: 'bundle.js',
   },
-  mode: 'development',
-  resolve: {
-    extensions: ['.js', '.jsx'],
+  devtool: 'eval-source-map',
+  mode: process.env.NODE_ENV,
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    // enable HMR on the devServer
+    hot: true,
+    // fallback to root for other urls
+    historyApiFallback: true,
+
+    static: {
+      // match the output path
+      directory: path.resolve(__dirname, 'dist'),
+      // match the output 'publicPath'
+      publicPath: '/',
+    },
+
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    /**
+     * proxy is required in order to make api calls to
+     * express server while using hot-reload webpack server
+     * routes api fetch requests from localhost:8080/api/* (webpack dev server)
+     * to localhost:3000/api/* (where our Express server is running)
+     */
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+
+      },
+      '/assets/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+
+      },
+    },
   },
-  //Setup loaders
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        use: ['source-map-loader'],
-      },
-      {
-        test: /\.(jsx|js)$/,
+        test: /.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ['@babel/preset-react'],
           },
         },
       },
       {
-        test: /\.css$/i,
+        test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
-          'file-loader',
           {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true, // webpack@1.x
-              disable: true, // webpack@2.x and newer
-            },
+            loader: 'file-loader',
           },
-        ],
+        ]
       },
     ],
   },
-
-  // Setup plugin to use a HTML file for serving bundled js files
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'index.html'),
+      template: './public/index.html',
     }),
-
-    // Or: To strip all locales except “en”, “es-us” and “ru”
-    // (“en” is built into Moment and can’t be removed)
   ],
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: ['.js', '.jsx'],
+  },
 };
