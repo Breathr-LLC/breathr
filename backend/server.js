@@ -1,19 +1,14 @@
-const query = require('./db/postgresql');
+const express = require('express')
+const app = express()
 
-async function createTable() {
-  const sql = 'CREATE TABLE IF NOT EXISTS poems (id SERIAL PRIMARY KEY, content TEXT)';
-  await query(sql);
+app.use('/api/poems', (req, res) => {
+  res.status(201).send('Poem router worked')
+})
 
-  console.log('created table');
-}
+app.use('*', (req, res) => {
+  res.status(405).send('Hit unknown endpoint')
+})
 
-async function insert() {
-  const sql = 'INSERT INTO poems (content) VALUES ($1)';
-  const params = ['Happy poem']
-  await query(sql, params);
-
-  console.log('inserted into table');
-}
-
-createTable();
-insert();
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
