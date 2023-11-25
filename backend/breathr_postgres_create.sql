@@ -18,7 +18,8 @@ CREATE TABLE poems (
 	"poem_id" SERIAL PRIMARY KEY,
   "poem_title" VARCHAR NOT NULL,
 	"poem_text" VARCHAR NOT NULL,
-  "author" VARCHAR NOT NULL,
+  "author_first_name" VARCHAR NOT NULL,
+  "author_last_name" VARCHAR NULL,
 );
 
 CREATE TABLE users_poems (
