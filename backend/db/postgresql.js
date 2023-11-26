@@ -1,10 +1,10 @@
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: '../../.env'});
 const connectionString = process.env.CONNECTION_STRING;
 
 const pool = new Pool({
-  connectionString: connectionString,
+  connectionString,
   max: 2,
 });
 
@@ -15,6 +15,7 @@ async function query(sql, params) {
     const result = await client.query(sql, params);
     // release the client so that it doesn't take up memory
     client.release();
+    console.log('connected to db')
     return result;
   } catch (error) {
     console.log(error);

@@ -1,4 +1,4 @@
-const query = require('./db/postgresql');
+const query = require('./postgresql');
 
 async function createTable() {
   const sql = 'CREATE TABLE IF NOT EXISTS poems (id SERIAL PRIMARY KEY, content TEXT)';
@@ -8,12 +8,12 @@ async function createTable() {
 }
 
 async function insert() {
-  const sql = 'INSERT INTO poems (content) VALUES ($1)';
-  const params = ['Happy poem']
-  await query(sql, params);
+  const sql = 'INSERT INTO authors (first_name, last_name) VALUES (\'AJ\', \'Mattus\')';
+  const params = ['Jeanine', 'Peters']
+  await query(sql, []);
 
   console.log('inserted into table');
 }
 
-createTable();
+// createTable();
 insert();
