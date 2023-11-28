@@ -2,13 +2,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const journalRouter = require('./routes/journals');
+const apiRouter = require('./routes/api');
 
 // handle parsing request body
 app.use(express.json());
 
 // route handlers
-app.use('/api/journal', journalRouter);
+app.use('/api', apiRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => {
