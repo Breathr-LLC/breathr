@@ -1,5 +1,4 @@
 const poemsModel = require('../models/poemsModel');
-
 const poemController = {};
 
 // builds error object for input to global error handler
@@ -14,6 +13,7 @@ const createErr = (errInfo) => {
 // mark a poem as a favorite
 poemController.markFavorite = async (req, res, next) => {
   const { userID, poemID } = req.body;
+  // verify that request supplies both userID and poemID
   if (!userID || !poemID) {
     return next(createErr({
       method: 'markFavorite',
@@ -34,14 +34,33 @@ poemController.markFavorite = async (req, res, next) => {
 };
 
 // remove a poem from the given user's favorites
-poemController.removeFavorite = (req, res, next) => {
-
-} ;
+poemController.removeFavorite = async (req, res, next) => {
+  const { userID, poemID } = req.body;
+  // verify that request supplies both userID and poemID
+  if (!userID || !poemID) {
+    return next(createErr({
+      method: 'removeFavorite',
+      type: 'Parsing request body',
+      err: 'User ID and/or poem ID not provided'
+    }));
+  }
+  const dbResponse = await poemsModel.removeFavorite(userID, poemID);
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'removeFavorite',
+      type: 'Deleting from database',
+      err: dbResponse
+    }));
+  }
+  return next();
+};
 
 // get favorite poems data (poem_id, title, author) for the given user
 // allows for creation of list of favorite poems on frontend
 poemController.getFavorites = async (req, res, next) => {
   const { userID } = req.body;
+  // verify that request supplies userID
   if (!userID) {
     return next(createErr({
       method: 'getFavorites',
@@ -59,6 +78,45 @@ poemController.getFavorites = async (req, res, next) => {
     }));
   }
   res.locals.favorites = dbResponse.rows;
+  return next();
+};
+
+// get poems data (poem_id, title, author) for all poems
+// allows for creation of list of poems on frontend
+poemController.getAllPoems = async (req, res, next) => {
+  const dbResponse = await poemsModel.getAllPoems();
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'getAllPoems',
+      type: 'Reading from database',
+      err: dbResponse
+    }));
+  }
+  res.locals.poems = dbResponse.rows;
+  return next();
+};
+
+poemController.getSinglePoem = async (req, res, next) => {
+  const { poemID } = req.body;
+  // verify that request supplies poemID
+  if (!poemID) {
+    return next(createErr({
+      method: 'getSinglePoem',
+      type: 'Parsing request body',
+      err: 'Poem ID not provided'
+    }));
+  }
+  const dbResponse = await poemsModel.getSinglePoem(poemID);
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'getSinglePoem',
+      type: 'Reading from database',
+      err: dbResponse
+    }));
+  }
+  res.locals.poem = dbResponse.rows;
   return next();
 };
 
