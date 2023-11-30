@@ -40,4 +40,45 @@ journalController.getJournalEntry = async (req, res, next) => {
   return next();
 };
 
+journalController.deleteEntry = async (req, res, next) => {
+  const { entryID } = req.params;
+  const dbResponse = await journalModel.deleteEntry(entryID);
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'deleteEntry',
+      type: 'Deleting from database',
+      err: dbResponse
+    }));
+  }
+  return next();
+};
+
+journalController.addEntry = async (req, res, next) => {
+  const { title, category, text, user_id, date } = req.body;
+  if (!title || !category || !text || !user_id || !date) return next(
+    createErr({
+      method: 'addEntry',
+      type: 'Parsing request body',
+      err: 'Entry information provided is incomplete'
+    }));
+  const dbResponse = await journalModel.addEntry(
+    title, category, text, date, user_id
+  );
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'addEntry',
+      type: 'Writing to database',
+      err: dbResponse
+    }));
+  }
+  return next();
+};
+
+journalController.updateEntry = async (req, res, next) => {
+  const { title, category, text, date, entry_id } = req.body;
+  // handle case where no data is provided
+};
+
 module.exports = journalController;
