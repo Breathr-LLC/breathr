@@ -3,8 +3,20 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  variants: {
+    extend: {
+      borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+      borderOpacity: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+    },
+  },
   theme: {
     extend: {
+      fontFamily: {
+        'red-hat-display': ['"Red Hat Display"', 'sans-serif']
+      },
+      boxShadow: {
+        'custom': '0 4px 6px -1px rgba(0, 0, 0, .01)', 
+      },
       colors: {
         primary: {
           light: '#006973', 

@@ -65,7 +65,7 @@ module.exports = {
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -92,6 +92,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new webpack.ProvidePlugin({
+      React: 'react'
+    })
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
