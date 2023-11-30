@@ -1,4 +1,3 @@
-
 const query = require('../db/postgresql');
 const poemsModel = {};
 
