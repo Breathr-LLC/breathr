@@ -38,15 +38,15 @@ module.exports = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: {
-      '/api': {
+      '/api/**': {
         target: 'http://localhost:3000',
         secure: false,
-        
+
       },
       '/assets/**': {
         target: 'http://localhost:3000/',
         secure: false,
-        
+
       },
     },
   },
@@ -65,7 +65,7 @@ module.exports = {
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
@@ -74,6 +74,17 @@ module.exports = {
             loader: 'file-loader',
           },
         ]
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              limit: 10000
+            },
+          },
+        ],
       },
     ],
   },

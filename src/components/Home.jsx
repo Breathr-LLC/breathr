@@ -1,9 +1,7 @@
-function Home() {
-  return (
-    <div>
-        <h1>Home Component</h1>
-    </div>
-  );
-}
+import React from 'react';
+
+const Home = () => {
+
+};
 
 export default Home;
