@@ -92,6 +92,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    new webpack.ProvidePlugin({
+      React: 'react'
+    })
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
