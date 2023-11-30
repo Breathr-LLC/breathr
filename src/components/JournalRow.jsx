@@ -1,4 +1,4 @@
-import journalCSS from '../journalCSS.css';
+import React from 'react';
 
 export default function JournalRow(props) {
     const {

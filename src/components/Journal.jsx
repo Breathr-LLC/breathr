@@ -1,21 +1,16 @@
-// import {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import JournalRow from './JournalRow';
-import journalEntryData from '../journalEntryData';
-import journalCSS from '../journalCSS.css';
 
 export default function Journal() {
+// const journalRows = journalEntryData.map((entry) => (
+//   <JournalRow className="journal--container"
+//     key={entry.entry_id} 
+//     {...entry}
+//   />
+// ))
 
-// const [userEntries, setUserEntries] = useState([]);
-
-const journalRows = journalEntryData.map((entry) => (
-  <JournalRow className="journal--container"
-    key={entry.entry_id} 
-    {...entry}
-  />
-))
-
-
+let journalRows;
 
     return (
       <div className="journal">
@@ -24,7 +19,6 @@ const journalRows = journalEntryData.map((entry) => (
               <button>search</button>
           </nav>
           <table className="journal--table">
-            {/* <caption>My Journal Entries</caption> */}
             <thead className="journal--header">
               <tr>
                 <th>date</th>
@@ -39,4 +33,3 @@ const journalRows = journalEntryData.map((entry) => (
       </div>
     );
   }
-  // {journalRows}

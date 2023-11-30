@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DatePicker from './DatePicker';
 import Picker from "emoji-picker-react";
-import journalCSS from '../journalCSS.css';
 
 export default function JournalEntry(props) {
 
