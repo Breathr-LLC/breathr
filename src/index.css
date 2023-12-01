@@ -50,7 +50,7 @@ canvas {
   width: 25rem;
   width: 75%;
   height: 75%;
-  height: 15rem;
+  height: 10rem;
   perspective: 500px;
   transform-style: preserve-3d;
   margin-bottom: 10%;
