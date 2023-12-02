@@ -22,7 +22,7 @@ export default function JournalRow(props) {
             <td className="journalRow--date">{entryDate}</td>
             <td>{title}</td>
             <td>{category}</td>
-            <Link to="/JournalEntry"><button>edit</button></Link>
+            <Link to='/journalentry' state={props}><button>edit</button></Link>
             <button onClick={deleteEntry} className="journalRow--delete">x</button>
         </tr>
     )
