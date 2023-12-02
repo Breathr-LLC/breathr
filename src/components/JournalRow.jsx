@@ -7,11 +7,12 @@ export default function JournalRow(props) {
         date,
         title,
         text,
-        category
+        category,
+        deleteEntry
     } = props;
 
     function deleteOnClick() {
-        props.deleteEntry(entry_id)
+       deleteEntry(entry_id);
     }
 
     const entryDate = new Date(date).toDateString();
@@ -30,7 +31,7 @@ export default function JournalRow(props) {
                 />
             </td>
             <Link to='/journalentry' state={props}><button>edit</button></Link>
-            <button onClick={deleteOnClick} className="journalRow--delete">delete</button>
+            <button onClick={deleteOnClick}  className="journalRow--delete">delete</button>
         </tr>
     )
 };

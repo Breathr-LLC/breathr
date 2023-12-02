@@ -57,7 +57,7 @@ export default function JournalEntry(props) {
                         ) : (
                             <span>What's your mood?</span>
                             )}
-                        {!chosenEmoji && <Picker onEmojiClick={onEmojiClick} category={['smileys_people']} />}
+                        {!chosenEmoji && <Picker onEmojiClick={onEmojiClick} />}
                     </div>
                 </div>
                 <main className="entry--main">
