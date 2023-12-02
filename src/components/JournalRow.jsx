@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function JournalRow(props) {
     const {
         entry_id,
         date,
         title,
-        body,
-        mood
+        text,
+        category
     } = props;
 
     const deleteEntry = () => {
@@ -19,9 +20,9 @@ export default function JournalRow(props) {
     return (
         <tr className="journalRow-container">
             <td className="journalRow--date">{entryDate}</td>
-            {/* <td className="journal--body">{body}</td> */}
             <td>{title}</td>
-            <td>{mood}</td>
+            <td>{category}</td>
+            <Link to="/JournalEntry"><button>edit</button></Link>
             <button onClick={deleteEntry} className="journalRow--delete">x</button>
         </tr>
     )
