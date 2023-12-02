@@ -20,8 +20,12 @@ code {
 
 .color-palette {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 1rem;
+  margin-left: 1rem;
+  max-width: 400px;
+
 }
 
 .color-swatch {
@@ -48,31 +52,33 @@ canvas {
 .carousel {
   position: absolute;
   width: 100%;
-  /* height: auto; */
+  height: auto;
   margin: auto;
+  margin-top: 50px;
   max-width: 600px;
   perspective: 500px;
   transform-style: preserve-3d;
-  /* margin-bottom: 10%; */
+  margin-bottom: 10%;
 }
 
 .card-container {
+  position: absolute;
   width: 100%;
   height: auto;
-  transform: rotateY(calc(var(--offset) * 50deg))
+  /* transform: rotateY(calc(var(--offset) * 50deg))
   scaleY(calc(1 + var(--abs-offset) * -0.4))
   translateZ(calc(var(--abs-offset) - 30rem))
-  translateX(calc(var(--direction) * -5rem));
-  filter: blur(calc(var(--abs-offset) * 1rem));
+  translateX(calc(var(--direction) * -5rem)); */
+  /* filter: blur(calc(var(--abs-offset) * 1rem)); */
   transition: all 0.3s ease-out;
 }
 
 .card {
-  width: 90%;
+  /* width: 90%; */
   height: auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   max-height: 500px;
-  margin: 3rem 3rem;
+  /* margin: 3rem 3rem; */
   padding: 2rem;
   background-color: rgba(219, 228, 230, calc(1 - var(--abs-offset) * 1.5));
   border-radius: 1rem;
@@ -85,7 +91,7 @@ canvas {
   text-align: center;
   font-size: 2rem;
   font-weight: bold;
-  margin: 0 0 0.7rem;
+  /* margin: 0 0 0.7rem; */
 }
 
 .card p,
@@ -103,15 +109,17 @@ canvas {
   align-items: center;
   justify-content: center;
   top: 50%;
+  margin-top:50px;
   z-index: 2;
   cursor: pointer;
   user-select: none;
-  /* background: unset; */
-  /* border: unset; */
+  background: unset;
+  border: unset;
 }
 
 .nav.left {
   left: 0;
+  /* height: absolute; */
   transform: translateX(-100%) translateY(-50%);
 }
 
@@ -121,7 +129,7 @@ canvas {
 }
 
 .expanded {
-  max-height: none; /* Example property to change */
+  max-height: none; 
   overflow: hidden; 
 }
 

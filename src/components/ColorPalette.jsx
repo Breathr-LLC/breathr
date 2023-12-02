@@ -2,7 +2,20 @@ import React from "react";
 
 const ColorPalette = ({currentColor, changeColor}) => {
 
-  const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'turquoise', 'purple', 'pink', 'deeppink'];
+  const colors = [
+    'red', 'maroon', 'deeppink', 'fuchsia', 'pink',
+    'orange', 'darkorange',
+    'yellow', 'gold', 'khaki',
+    'lime', 'green', 'limegreen', 'darkgreen', 'olive', 'darkolivegreen', 'forestgreen',
+    'turquoise', 'cyan', 'aqua',
+    'teal', 
+    'blue', 'dodgerblue', 'royalblue', 'mediumblue', 'darkblue', 'navy',
+    'indigo', 'blueviolet', 'darkviolet',
+    'purple', 'violet',
+    'gray', 'lightgrey', 'darkgrey', 'slategray',
+    'white', 'snow', 'ivory',
+    'black'
+  ];
   
   let index = 0;
 
