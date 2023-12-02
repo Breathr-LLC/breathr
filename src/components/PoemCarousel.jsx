@@ -12,7 +12,7 @@ const PoemCarousel = ({ children }) => {
   const count = React.Children.count(children);
 
   return (
-    <div className="carousel flex flex-col items-center justify-center p-4">
+    <div className="carousel">
       {active > 0 && (
         <button className= "nav left" onClick={()=> setActive((i) => i - 1)}>
           <MdChevronLeft/>

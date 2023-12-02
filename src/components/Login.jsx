@@ -23,6 +23,7 @@ export default function Login() {
                     })
                     .then((res) => {
                         setProfile(res.data);
+                        console.log('res data', res.data)
                     })
                     .catch((err) => console.log(err));
             }

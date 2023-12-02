@@ -13,28 +13,24 @@ import Navbar from './components/Navbar';
 function App() {
   return (
     <BrowserRouter>
-      <div className="h-screen bg-background-light">
+      <div className="flex flex-col h-screen bg-background-light">
 
         {/* Navbar */}
-        <div className="z-20">
-          <Navbar />
-        </div>
+        <Navbar />
 
-        {/* Content below Navbar */}
-        <div className="grid grid-cols-[auto] grid-rows-[auto]">
+        {/* Flex container for sidebar and main content */}
+        <div className="flex flex-1 overflow-hidden">
           {/* Sidebar */}
-          <div className="z-10">
-            <Sidebar className="col-start-1 col-span-full row-start-1 row-span-full h-screen"/>
-          </div>
+          <Sidebar />
 
           {/* Main content area */}
-          <main className="overflow-auto p-4 flex-1 col-start-2 row-start-2">
+          <main className="flex-1 flex justify-center p-4 overflow-auto">
             <Routes>
-              <Route path='/poems' element={<Poems/>} />
+            <Route path='/poems' element={<Poems/>} />
               <Route path='/coloring-book' element={<ColoringBook/>} />
               <Route path='/journal' element={<Journal/>} />
               <Route path='/journalentry' element={<JournalEntry/>} />
-        <Route path='/login' element={<Login/>} />
+              <Route path='/login' element={<Login/>} />
               <Route path='/signup' element={<Signup/>} />
               <Route path='/' element={<Home/>} />
             </Routes>
@@ -45,5 +41,6 @@ function App() {
     </BrowserRouter>
   );
 }
+
 
 export default App;

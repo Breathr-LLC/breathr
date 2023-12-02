@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import FreeHandCanvas from './FreeHandCanvas';
 import ColorPalette from './ColorPalette';
 import ColoringBookCanvas from './ColoringBookCanvas';
 
@@ -7,13 +6,18 @@ const ColoringBook = () => {
   const [currentColor, setCurrentColor] = useState('blue');
 
   return (
-    <div>
-      <div className= "canvas">
+    
+    <div className="flex">
+    
+      <div className="">
         <ColoringBookCanvas currentColor={currentColor}/>
       </div>
-      <ColorPalette currentColor={currentColor} changeColor={setCurrentColor}/>
+    
+      <div>
+        <ColorPalette currentColor={currentColor} changeColor={setCurrentColor}/>
+      </div>
     </div>
-  )
+  );
 };
 
 export default ColoringBook;

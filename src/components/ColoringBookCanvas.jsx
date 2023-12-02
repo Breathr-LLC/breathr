@@ -85,7 +85,8 @@ const ColoringBookCanvas = ({ currentColor }) => {
   return (
     <div>
       <canvas ref={canvasRef} id="coloring-canvas" />
-      <button onClick={clearCanvas}>Clear</button>
+      <br></br>
+      <button className="p-4 bg-primary-light hover:bg-error-light text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110" onClick={clearCanvas}>Clear</button>
     </div>
   );
 };
