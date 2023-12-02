@@ -10,10 +10,20 @@ export default function JournalRow(props) {
         category
     } = props;
 
-    const deleteEntry = () => {
-        //delete entry_id
-        return entry_id;
-    };
+    // const deleteEntry = () => {
+    //         console.log(`in delete entry ${props.entry_id}`)
+    //         fetch(`http://localhost:3000/api/journal/deleteEntry/entry-${props.entry_id}`, {
+    //             method: "DELETE"
+    //         })
+    //         // .then(response => response.json())
+    //         .catch(err => {
+    //             return console.log(err)
+    //         })
+    // };
+
+    function deleteOnClick() {
+        props.deleteEntry(props.entry_id)
+    }
 
     const entryDate = new Date(date).toDateString();
 
@@ -23,7 +33,7 @@ export default function JournalRow(props) {
             <td>{title}</td>
             <td>{category}</td>
             <Link to="/JournalEntry"><button>edit</button></Link>
-            <button onClick={deleteEntry} className="journalRow--delete">x</button>
+            <button onClick={deleteOnClick} className="journalRow--delete">delete</button>
         </tr>
     )
 };

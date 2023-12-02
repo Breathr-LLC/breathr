@@ -13,6 +13,20 @@ export default function Journal() {
     .then(data => setJournals(data))
   }, []);
 
+  const deleteEntry = (entry_id) => {
+    console.log(`in delete entry ${entry_id}`)
+    fetch(`http://localhost:3000/api/journal/deleteEntry/entry-${entry_id}`, {
+        method: "DELETE"
+    })
+    .catch(err => {
+        return console.log(err)
+    })
+    .then(() => fetch(`http://localhost:3000/api/journal/getJournalEntries/user-${userID}`)
+    .then(response => response.json())
+    .then(data => setJournals(data))
+    .then(() => console.log("inside fetch")))
+};
+
   return (
     <div className="journal">
         <nav className="journal--nav">
@@ -33,6 +47,7 @@ export default function Journal() {
                 <JournalRow 
                   className="journal--container"
                   key={entry.entry_id} 
+                  deleteEntry={deleteEntry}
                   {...entry}
                 />
               ))
