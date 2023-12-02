@@ -77,8 +77,25 @@ journalController.addEntry = async (req, res, next) => {
 };
 
 journalController.updateEntry = async (req, res, next) => {
-  const { title, category, text, date, entry_id } = req.body;
-  // handle case where no data is provided
+  const { title, category, text, entry_id, date } = req.body;
+  if (!title || !category || !text || !entry_id || !date) return next(
+    createErr({
+      method: 'updateEntry',
+      type: 'Parsing request body',
+      err: 'Entry information provided is incomplete'
+    }));
+  const dbResponse = await journalModel.updateEntry(
+    title, category, text, date, entry_id
+  );
+  // check whether error occurred while accessing db
+  if (dbResponse.code) {
+    return next(createErr({
+      method: 'updateEntry',
+      type: 'Writing to database',
+      err: dbResponse
+    }));
+  }
+  return next();
 };
 
 module.exports = journalController;
