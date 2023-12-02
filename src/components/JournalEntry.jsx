@@ -3,7 +3,6 @@ import DatePicker from './DatePicker';
 import Picker from "emoji-picker-react";
 
 export default function JournalEntry(props) {
-
     const [chosenEmoji, setChosenEmoji] = useState(null);
 
     const onEmojiClick = (event, emojiObject) => {
@@ -47,6 +46,3 @@ export default function JournalEntry(props) {
         </div>
     );
 }
-
-
- 
