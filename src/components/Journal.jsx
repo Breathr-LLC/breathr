@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import JournalRow from './JournalRow';
 
 export default function Journal() {
-// const journalRows = journalEntryData.map((entry) => (
-//   <JournalRow className="journal--container"
-//     key={entry.entry_id} 
-//     {...entry}
-//   />
-// ))
+  const userID = 1;
 
-let journalRows;
+  const [journals, setJournals] = useState([])
+  
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/journal/getJournalEntries/user-${userID}`)
+    .then(response => response.json())
+    .then(data => setJournals(data))
+  }, []);
 
-    return (
-      <div className="journal">
-          <nav className="journal--nav">
-              <Link to="/JournalEntry"><button>+ new entry</button></Link>
-              <button>search</button>
-          </nav>
-          <table className="journal--table">
-            <thead className="journal--header">
-              <tr>
-                <th>date</th>
-                <th>journal entries</th>
-                <th>mood</th>
-              </tr>
-            </thead>
-            <tbody>
-              {journalRows}
-            </tbody>
-          </table>
-      </div>
-    );
-  }
+  return (
+    <div className="journal">
+        <nav className="journal--nav">
+            <Link to="/JournalEntry"><button>+ new entry</button></Link>
+            <button>search</button>
+        </nav>
+        <table className="journal--table">
+          <thead className="journal--header">
+            <tr>
+              <th>date</th>
+              <th>journal entries</th>
+              <th>mood</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              journals.map(entry => (
+                <JournalRow 
+                  className="journal--container"
+                  key={entry.entry_id} 
+                  {...entry}
+                />
+              ))
+            }
+          </tbody>
+        </table>
+    </div>
+  );
+}
