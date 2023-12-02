@@ -14,7 +14,6 @@ export default function Journal() {
   }, []);
 
   const deleteEntry = (entry_id) => {
-    console.log(`in delete entry ${entry_id}`)
     fetch(`http://localhost:3000/api/journal/deleteEntry/entry-${entry_id}`, {
         method: "DELETE"
     })
@@ -23,8 +22,7 @@ export default function Journal() {
     })
     .then(() => fetch(`http://localhost:3000/api/journal/getJournalEntries/user-${userID}`)
     .then(response => response.json())
-    .then(data => setJournals(data))
-    .then(() => console.log("inside fetch")))
+    .then(data => setJournals(data)))
 };
 
   return (

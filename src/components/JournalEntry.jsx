@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import DatePicker from './DatePicker';
+import dayjs from 'dayjs';
 import Picker from "emoji-picker-react";
 
 export default function JournalEntry(props) {
@@ -12,36 +13,23 @@ export default function JournalEntry(props) {
         setChosenEmoji(emojiObject);
     };
 
-    // const {
-    //     entry_id,
-    //     date,
-    //     title,
-    //     text,
-    //     category
-    // } = props;
+    let currDate = (new Date()).toLocaleDateString('en-US').toString();
 
-    // journalsModel.addEntry = async (title, category, text, date, user_id) => {
-    //     const args = [title, category, text, date, user_id];
-    //     const sql = 'INSERT INTO journal_entries (title, category, text, date, user_id) ' +
-    //                 'VALUES ($1, $2, $3, $4, $5)';
-    //     return await query(sql, args);
-    //   };
     const userID = 1;
 
     function createNewEntry() {
-        console.log("in createNewEntry")
-        fetch(`localhost:3000/api/journal/addEntry`, {
+        fetch(`http://localhost:3000/api/journal/addEntry`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
             },
             body: JSON.stringify({
-                title: "test title",
-                category: "test title",
-                text: "test title",
-                date: "test title",
-                user_id: 1
+                title: document.querySelector("#title").value,
+                category: chosenEmoji.target.src,
+                text: document.querySelector("#text").value,
+                date: currDate,
+                user_id: userID
             })
         })
         .catch(err => {
@@ -53,7 +41,7 @@ export default function JournalEntry(props) {
         <div>
             <form action="" id="entry">
                 <div className="entry--header">
-                    <DatePicker name="date" id="date" />
+                    <DatePicker name="date" id="date" value={dayjs(currDate)}/>
                     <div>
                         {chosenEmoji ? (
                             <span>
@@ -69,7 +57,7 @@ export default function JournalEntry(props) {
                         ) : (
                             <span>What's your mood?</span>
                             )}
-                        {!chosenEmoji && <Picker onEmojiClick={onEmojiClick} />}
+                        {!chosenEmoji && <Picker onEmojiClick={onEmojiClick} category={['smileys_people']} />}
                     </div>
                 </div>
                 <main className="entry--main">
