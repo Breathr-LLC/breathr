@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import DatePicker from './DatePicker';
 import Picker from "emoji-picker-react";
 
 export default function JournalEntry(props) {
+    // access data passed in from Link component
+    const { state } = useLocation();
     const [chosenEmoji, setChosenEmoji] = useState(null);
 
     const onEmojiClick = (event, emojiObject) => {
