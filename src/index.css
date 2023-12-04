@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap');
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.color-palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  max-width: 400px;
+
+}
+
+.color-swatch {
+  height: 70px;
+  width: 70px;
+  border-radius: 7px;
+  margin: 9px;
+  cursor: pointer;
+  border: 4px solid black;
+}
+
+.color-swatch-active {
+  box-shadow: inset 0 0 15px #000000;
+  transition: all 0.2s;
+}
+
+canvas {
+  border: 1px solid black;
+  width: 800px;
+  height: 800px;
+  background-color: transparent;
+}
+
+.carousel {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  margin-top: 50px;
+  max-width: 600px;
+  perspective: 500px;
+  transform-style: preserve-3d;
+  margin-bottom: 10%;
+}
+
+.card-container {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  /* transform: rotateY(calc(var(--offset) * 50deg))
+  scaleY(calc(1 + var(--abs-offset) * -0.4))
+  translateZ(calc(var(--abs-offset) - 30rem))
+  translateX(calc(var(--direction) * -5rem)); */
+  /* filter: blur(calc(var(--abs-offset) * 1rem)); */
+  transition: all 0.3s ease-out;
+}
+
+.card {
+  /* width: 90%; */
+  height: auto;
+  /* padding: 2rem; */
+  max-height: 500px;
+  /* margin: 3rem 3rem; */
+  padding: 2rem;
+  background-color: rgba(219, 228, 230, calc(1 - var(--abs-offset) * 1.5));
+  border-radius: 1rem;
+  color: #9ca3af;
+  text-align: justify;
+  transition: all .3s ease-out;
+}
+
+.card h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  /* margin: 0 0 0.7rem; */
+}
+
+.card p,
+.card h2 {
+  color: theme('colors.onSurfaceVariant.light');
+  transition: all 0.3s ease-out;
+  opacity: var(--active);
+}
+
+.nav {
+  color: black;
+  font-size: 5rem;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  margin-top:50px;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  background: unset;
+  border: unset;
+}
+
+.nav.left {
+  left: 0;
+  /* height: absolute; */
+  transform: translateX(-100%) translateY(-50%);
+}
+
+.nav.right {
+  right: 0;
+  transform: translateX(100%) translateY(-50%);
+}
+
+.expanded {
+  max-height: none; 
+  overflow: hidden; 
+}
+
+.poem-card-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.poem-text {
+  color: black;
+  display: flex;
+  justify-content: center;
+}
